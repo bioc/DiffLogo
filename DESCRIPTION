@@ -1,11 +1,11 @@
 Package: DiffLogo
 Type: Package
-Title: DiffLogo: A comparative visualisation of biooligomer motifs
-Version: 0.99.5
+Title: DiffLogo: A comparative visualisation of sequence motifs
+Version: 0.99.6
 Authors@R: c( person("Martin", "Nettling", role = "aut", email =
         "martin.nettling@informatik.uni-halle.de"), person("Hendrik",
         "Treutler", role = c("aut",
-        "cre"),email="hendrik.treutler@ipb-halle.de"), person("Jan",
+        "cre"),email="htreutle@ipb-halle.de"), person("Jan",
         "Grau", role = c("aut", "ctb"),email=""), person("Jens",
         "Keilwagen", role = c("aut", "ctb"),email=""), person("Stefan",
         "Posch", role = "aut"), person("Ivo", "Grosse", role = "aut") )
