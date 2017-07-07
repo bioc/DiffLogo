@@ -7,16 +7,18 @@
 ##' @param stackHeight function for the height of a stack at position i
 ##' @param baseDistribution function for the heights of the individual bases
 ##' @param alphabet of type Alphabet
+##' @param main the main title for the plot
+##' @return none (draws sequence logo)
 ##' @export
 ##' @author Martin Nettling
 ##' @examples
 ##' motif_folder= "extdata/pwm"
 ##' motif_name = "HepG2"
-##' fileName = paste(motif_folder,"/",motif_name,".txt",sep="")
+##' fileName = paste(motif_folder,"/",motif_name,".pwm",sep="")
 ##' file = system.file(fileName, package = "DiffLogo")
-##' motif = as.matrix(read.delim(file,header=FALSE))
+##' motif = getPwmFromPwmFile(file)
 ##' seqLogo(pwm = motif)
-seqLogo = function (pwm, sparse=FALSE, drawLines=0.5, stackHeight=informationContent, baseDistribution=probabilities, alphabet=DNA) { 
+seqLogo = function (pwm, sparse=FALSE, drawLines=0.5, stackHeight=informationContent, baseDistribution=probabilities, alphabet=DNA, main=NULL) { 
     pwm = preconditionTransformPWM(pwm,alphabet);
     preconditionPWM(pwm);
 
@@ -50,9 +52,9 @@ seqLogo = function (pwm, sparse=FALSE, drawLines=0.5, stackHeight=informationCon
     }
     if(sparse) {
         plot(NA, xlim=c(0.5,x.pos), ylim=c(0,log2(alphabet$size)),xaxt="n", ylab="",
-        mgp=c(0, .35, 0),tck=-0.02, cex.axis=0.8, frame.plot=FALSE,xlab="")
+        mgp=c(0, .35, 0),tck=-0.02, cex.axis=0.8, frame.plot=FALSE,xlab="", main=main)
     } else {
-        plot(NA, xlim=c(0.5,x.pos), ylim=c(0,log2(alphabet$size)), xaxt="n", ylab=sh$ylab, frame.plot=FALSE,xlab="Position")
+        plot(NA, xlim=c(0.5,x.pos), ylim=c(0,log2(alphabet$size)), xaxt="n", ylab=sh$ylab, frame.plot=FALSE,xlab="Position", main=main)
     }
 
     for(y in seq(0,log2(alphabet$size),drawLines)) {
@@ -69,13 +71,12 @@ seqLogo = function (pwm, sparse=FALSE, drawLines=0.5, stackHeight=informationCon
 
 
 # appends the letter which to the object letters
-addLetter = function (letters, letterPolygon, x.pos, y.pos, ht, wt, col="black") 
-{
+addLetter = function (letters, letterPolygon, x.pos, y.pos, ht, wt, col="black") {
     x = x.pos + wt * letterPolygon$x
     y = y.pos + ht * letterPolygon$y
     polygons = sum(is.na(x))+1  # a letter can consist of more then one polygon
     letters$x = c(letters$x, NA, x)
     letters$y = c(letters$y, NA, y)
-    letters$col = c(letters$col, rep(col,polygons))
+    letters$col = c(letters$col, rep(col, polygons))
     letters
 }

@@ -15,3 +15,4 @@ citEntry(entry="article",
 		       "BMC bioinformatics, 2015 Nov 17;16:387. doi: 10.1186/s12859-015-0767-x."))
 
 citFooter(paste(""))
+
